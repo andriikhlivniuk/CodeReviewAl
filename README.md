@@ -115,3 +115,26 @@ Conclusion: Good start, but needs tests."
 
 ## Running Tests
 
+### 1. Run All Tests
+
+To run the complete test suite:
+
+```bash
+pytest
+```
+
+### Review Service Tests (`test_review_service.py`)
+- Tests code review generation using OpenAI API
+- Checks successful review generation with expected format
+- Verifies error handling for API failures
+- Tests validation of empty repositories
+
+### GitHub Service Tests (`test_github_service.py`)
+- Tests GitHub repository content fetching
+- Verifies successful file downloads from GitHub
+- Checks error handling for non-existent repositories
+- Validates correct parsing of repository contents
+
+## What if
+
+For large repositories, I would process files asynchronously to handle multiple files at once without slowing things down. To deal with API rate limits, I’d implement a queuing system with retries for GitHub and OpenAI requests, making sure we don't hit the limits too quickly. I would also keep track of API usage to avoid unexpected costs, setting up alerts or limits to manage expenses effectively.
