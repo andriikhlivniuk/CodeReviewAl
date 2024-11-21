@@ -1,14 +1,7 @@
 import requests
-from services.redis_service import cache_get, cache_set
 
 def fetch_repo_contents(github_repo_url: str) -> dict:
     try:
-        # Check Redis cache first
-        cache_key = f"repo:{github_repo_url}"
-        cached_contents = cache_get(cache_key)
-        if cached_contents:
-            return eval(cached_contents)  # Convert string back to dict
-        
         # Remove `.git` if it exists in the URL
         if github_repo_url.endswith(".git"):
             github_repo_url = github_repo_url[:-4]
@@ -30,8 +23,6 @@ def fetch_repo_contents(github_repo_url: str) -> dict:
                 file_response = requests.get(file["download_url"])
                 file_response.raise_for_status()
                 file_contents[file["name"]] = file_response.text
-
-        cache_set(cache_key, str(file_contents))
 
         return file_contents
 

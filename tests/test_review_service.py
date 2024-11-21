@@ -29,7 +29,7 @@ def test_generate_code_review_success(mock_repo_contents, mock_openai_response):
         result = generate_code_review(
             repo_contents=mock_repo_contents,
             assignment_description="Create a hello world program",
-            candidate_level="Junior"
+            candidate_level="junior"
         )
         
         assert isinstance(result, dict)
@@ -43,7 +43,7 @@ def test_generate_code_review_api_error(mock_repo_contents):
             generate_code_review(
                 repo_contents=mock_repo_contents,
                 assignment_description="Create a hello world program",
-                candidate_level="Junior"
+                candidate_level="junior"
             )
         
         assert "Failed to generate code review" in str(exc_info.value)
@@ -53,5 +53,5 @@ def test_generate_code_review_empty_repo():
         generate_code_review(
             repo_contents={},
             assignment_description="Create a hello world program",
-            candidate_level="Junior"
+            candidate_level="junior"
         )

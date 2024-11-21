@@ -26,7 +26,7 @@ The tool also integrates **Redis** for caching and performance optimization.
 - Python 3.7+
 - OpenAI API key (required to interact with GPT-4)
 - Redis (for caching)
-- Docker (to run Redis easily)
+- Docker (to run Redis)
 
 ---
 
@@ -96,9 +96,9 @@ You can directly fill out the input for the request body. The `POST /review` end
 - **assignment_description**: A string describing the coding assignment (e.g., "Build a simple web application").
 - **github_repo_url**: The GitHub repository URL to analyze (e.g., `https://github.com/username/repo_name`).
 - **candidate_level**: The level of the candidate. Can be:
-  - `Junior`
-  - `Middle`
-  - `Senior`
+  - `junior`
+  - `mid`
+  - `senior`
 
 #### Response:
 After filling in the required fields in Swagger UI, click "Execute" to send a request to the server. You will receive a response in the following format:
