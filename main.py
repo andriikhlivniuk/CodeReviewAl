@@ -7,27 +7,23 @@ app = FastAPI()
 
 @app.post("/review")
 async def review_assignment(request: ReviewRequest):
-    
-    repo_contents = fetch_repo_contents(str(request.github_repo_url))
-    review = generate_code_review(
-            repo_contents,
-            str(request.assignment_description),
-            str(request.candidate_level),
-        )
-    return review
-    # try:
-    #     # Step 1: Fetch GitHub repo contents
-    #     repo_contents = fetch_repo_contents(str(request.github_repo_url))
+    try:
+        str_github_repo_url = str(request.github_repo_url)
+        str_assignment_description = str(request.assignment_description)
+        str_candidate_level = str(request.candidate_level)
 
-    #     # Step 2: Generate code review using GPT API
-    #     review = generate_code_review(
-    #         repo_contents,
-    #         str(request.assignment_description),
-    #         str(request.candidate_level),
-    #     )
+        # Step 1: Fetch GitHub repo contents
+        repo_contents = fetch_repo_contents(str_github_repo_url)
 
-    #     # Step 3: Return the review result
-    #     return review
+        return repo_contents
+        # # Step 2: Generate code review using GPT API
+        # review = generate_code_review(
+        #     repo_contents,
+        #     str(str_assignment_description),
+        #     str(str_candidate_level),
+        # )
 
-    # except Exception as e:
-    #     raise HTTPException(status_code=500, detail=str(e))
+        # return review
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
