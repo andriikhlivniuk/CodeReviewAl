@@ -15,15 +15,15 @@ async def review_assignment(request: ReviewRequest):
         # Step 1: Fetch GitHub repo contents
         repo_contents = fetch_repo_contents(str_github_repo_url)
 
-        return repo_contents
-        # # Step 2: Generate code review using GPT API
-        # review = generate_code_review(
-        #     repo_contents,
-        #     str(str_assignment_description),
-        #     str(str_candidate_level),
-        # )
+        # Step 2: Generate code review using GPT API
+        review = generate_code_review(
+            repo_contents,
+            str(str_assignment_description),
+            str(str_candidate_level),
+        )
 
-        # return review
+        return review
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
