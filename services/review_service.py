@@ -6,6 +6,10 @@ load_dotenv()
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_code_review(repo_contents, assignment_description, candidate_level):
+    # Add validation for empty repo
+    if not repo_contents:
+        raise Exception("Cannot generate review for empty repository")
+
     try:
         # Format repository files and their content
         files_and_contents = "\n\n".join(
