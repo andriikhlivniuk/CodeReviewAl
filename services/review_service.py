@@ -1,6 +1,9 @@
 import openai
 import os
 from dotenv import load_dotenv
+import logging
+
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -9,7 +12,8 @@ def generate_code_review(repo_contents, assignment_description, candidate_level)
     # Add validation for empty repo
     if not repo_contents:
         raise Exception("Cannot generate review for empty repository")
-
+    
+    logger.info(f"Start generating code review")
     try:
         # Format repository files and their content
         files_and_contents = "\n\n".join(
@@ -52,4 +56,5 @@ def generate_code_review(repo_contents, assignment_description, candidate_level)
         return {"review": response.choices[0].message.content.strip()}
 
     except Exception as e:
+        logger.error(f"Failed to generate review: {str(e)}")
         raise Exception(f"Failed to generate code review: {str(e)}")

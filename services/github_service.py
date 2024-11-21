@@ -1,6 +1,10 @@
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
 
 def fetch_repo_contents(github_repo_url: str) -> dict:
+    logger.info(f"Start fetching repo content")
     try:
         # Remove `.git` if it exists in the URL
         if github_repo_url.endswith(".git"):
@@ -27,4 +31,5 @@ def fetch_repo_contents(github_repo_url: str) -> dict:
         return file_contents
 
     except requests.RequestException as e:
+        logger.error(f"Failed to fetch GitHub repo contents: {str(e)}")
         raise Exception(f"Failed to fetch GitHub repo contents: {str(e)}")
